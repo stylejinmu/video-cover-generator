@@ -13,15 +13,16 @@
                               [--text "封面文案"] [--style "装饰风格描述"]
 
 平台 key 列表：
-    wechat_vertical      微信视频号竖版  1080x1260 (6:7)
-    wechat_horizontal    微信视频号横版  1080x608  (16:9)
-    douyin_vertical      抖音竖版        1080x1920 (9:16)
-    douyin_horizontal    抖音横版        1920x1080 (16:9)
-    kuaishou_vertical    快手竖版        1080x1920 (9:16)
-    kuaishou_horizontal  快手横版        1920x1080 (16:9)
-    bilibili             B站             1280x960  (4:3)
-    xiaohongshu_vertical 小红书竖版      1080x1440 (3:4)
-    xiaohongshu_horizontal 小红书横版    1440x1080 (4:3)
+    wechat_vertical        微信视频号竖版          1080x1440 (3:4)   上限20MB
+    wechat_horizontal      微信视频号横版          1440x1080 (4:3)   上限20MB
+    douyin_vertical        抖音竖版                1080x1440 (3:4)   上限50MB
+    douyin_horizontal      抖音横版                1440x1080 (4:3)   上限50MB
+    kuaishou_vertical      快手竖版                1080x1440 (3:4)   上限15MB
+    kuaishou_horizontal    快手横版                1440x1080 (4:3)   上限15MB
+    bilibili_4_3           B站首页推荐封面          1280x960  (4:3)   上限20MB
+    bilibili_16_9          B站个人主页封面          1920x1080 (16:9)  上限20MB
+    xiaohongshu_vertical   小红书竖版              1080x1440 (3:4)   上限32MB
+    xiaohongshu_horizontal 小红书横版              1440x1080 (4:3)   上限32MB
 """
 
 import sys
@@ -33,16 +34,22 @@ from pathlib import Path
 from PIL import Image, ImageFilter, ImageOps
 
 # 各平台封面规格
+# 微信视频号：推荐3:4至2:1，分辨率不低于720×960，上限20MB
+# 抖音：推荐3:4、4:3、1:1、9:16、16:9；不建议宽高比超过1:2；不支持gif；上限50MB
+# 快手：推荐3:4竖版，上限15MB
+# B站：4:3用于首页推荐封面，16:9用于个人主页封面，上限20MB
+# 小红书：推荐3:4至2:1，分辨率不低于720×960，上限32MB
 PLATFORM_SPECS = {
-    "wechat_vertical":         {"name": "微信视频号竖版",   "width": 1080, "height": 1260},
-    "wechat_horizontal":       {"name": "微信视频号横版",   "width": 1080, "height": 608},
-    "douyin_vertical":         {"name": "抖音竖版",         "width": 1080, "height": 1920},
-    "douyin_horizontal":       {"name": "抖音横版",         "width": 1920, "height": 1080},
-    "kuaishou_vertical":       {"name": "快手竖版",         "width": 1080, "height": 1920},
-    "kuaishou_horizontal":     {"name": "快手横版",         "width": 1920, "height": 1080},
-    "bilibili":                {"name": "B站",              "width": 1280, "height": 960},
-    "xiaohongshu_vertical":    {"name": "小红书竖版",       "width": 1080, "height": 1440},
-    "xiaohongshu_horizontal":  {"name": "小红书横版",       "width": 1440, "height": 1080},
+    "wechat_vertical":         {"name": "微信视频号竖版",       "width": 1080, "height": 1440},
+    "wechat_horizontal":       {"name": "微信视频号横版",       "width": 1440, "height": 1080},
+    "douyin_vertical":         {"name": "抖音竖版",             "width": 1080, "height": 1440},
+    "douyin_horizontal":       {"name": "抖音横版",             "width": 1440, "height": 1080},
+    "kuaishou_vertical":       {"name": "快手竖版",             "width": 1080, "height": 1440},
+    "kuaishou_horizontal":     {"name": "快手横版",             "width": 1440, "height": 1080},
+    "bilibili_4_3":            {"name": "B站首页推荐封面",      "width": 1280, "height": 960},
+    "bilibili_16_9":           {"name": "B站个人主页封面",      "width": 1920, "height": 1080},
+    "xiaohongshu_vertical":    {"name": "小红书竖版",           "width": 1080, "height": 1440},
+    "xiaohongshu_horizontal":  {"name": "小红书横版",           "width": 1440, "height": 1080},
 }
 
 ALL_PLATFORMS = list(PLATFORM_SPECS.keys())
