@@ -1,7 +1,11 @@
 # Video Thumbnail Generator
 English | [简体中文](README_CN.md)
 
-Automatically generate video thumbnail images for major Chinese video platforms from a single source image. The original image content is preserved in full; blank areas introduced by aspect ratio differences are seamlessly filled using AI outpainting.
+Automatically generate video thumbnail images for major Chinese video platforms. Three working modes are supported:
+
+- **Image + Description**: When a source image is provided along with a text description, the image is used as the base and the description guides AI outpainting and decoration.
+- **Image only**: The source image is preserved in full; blank areas introduced by aspect ratio differences are seamlessly filled using AI outpainting.
+- **Description only**: When no image is provided, thumbnails are generated entirely from the text description using AI image generation.
 
 ## Features
 
