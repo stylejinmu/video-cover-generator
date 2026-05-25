@@ -20,8 +20,8 @@ Automatically generate video thumbnail images for major Chinese video platforms.
 |----------|---------------------|------------|-------|----------------|
 | WeChat Video | Profile Card | 810×1080 | 3:4 | `wechat_profile_card` |
 | WeChat Video | Share Card | 1280×720 | 16:9 | `wechat_share_card` |
-| Douyin | Vertical | 1080×1920 | 9:16 | `douyin_vertical` |
-| Douyin | Horizontal | 1920×1080 | 16:9 | `douyin_horizontal` |
+| Douyin | Vertical | 1080×1440 | 3:4 | `douyin_vertical` |
+| Douyin | Horizontal | 1440×1080 | 4:3 | `douyin_horizontal` |
 | Kuaishou | Vertical | 1080×1920 | 9:16 | `kuaishou_vertical` |
 | Kuaishou | Horizontal | 1920×1080 | 16:9 | `kuaishou_horizontal` |
 | Bilibili | Homepage Recommended Cover | 1280×960 | 4:3 | `bilibili` |
@@ -31,7 +31,7 @@ Automatically generate video thumbnail images for major Chinese video platforms.
 
 > **Platform Notes:**
 > - **WeChat Video**: Two sizes generated simultaneously — 3:4 for profile card (810×1080), 16:9 for share card (1280×720).
-> - **Douyin**: Recommended ratios 3:4, 4:3, 1:1, 9:16, 16:9; prioritize 3:4 or 4:3.
+> - **Douyin**: Recommended 3:4 vertical (1080×1440) and 4:3 horizontal (1440×1080).
 > - **Kuaishou**: Recommended 9:16 vertical.
 > - **Bilibili**: Two sizes generated simultaneously — 4:3 for homepage recommended cover, 16:9 for profile page cover.
 > - **Xiaohongshu**: Recommended ratio between 3:4 and 2:1.
