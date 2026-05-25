@@ -1,37 +1,36 @@
-# Video Cover Generator
-
+# Video Thumbnail Generator
 English | [简体中文](README_CN.md)
 
-Automatically generate video cover images for major Chinese video platforms from a single source image. The original image content is preserved in full; blank areas introduced by aspect ratio differences are seamlessly filled using AI outpainting.
+Automatically generate video thumbnail images for major Chinese video platforms from a single source image. The original image content is preserved in full; blank areas introduced by aspect ratio differences are seamlessly filled using AI outpainting.
 
 ## Features
 
-- **Multi-Platform Support**: Generates covers for WeChat Video, Douyin, Kuaishou, Bilibili, and Xiaohongshu (RED) — 10 specifications across vertical and horizontal orientations.
+- **Multi-Platform Support**: Generates thumbnails for WeChat Video, Douyin, Kuaishou, Bilibili, and Xiaohongshu (RED) — 10 specifications across various orientations and usages.
 - **AI Outpainting**: Naturally extends the background into blank areas, keeping the original subject intact and centered. No black bars, no awkward cropping.
-- **Customization**: Pass text or decoration requirements as prompts (e.g., add a title, apply a border style) to be applied during AI generation.
+- **Customization**: Pass text or decoration requirements as prompts (e.g., add a title, apply a border style) to be applied during AI generation. All text and decoration must serve social media engagement value.
 - **Graceful Fallback**: If the AI service is unavailable, automatically falls back to a Gaussian blur background composite.
 
 ## Supported Platforms & Specifications
 
-| Platform | Orientation / Usage | Size (W×H) | Ratio | Max File Size | `platform_key` |
-|----------|---------------------|------------|-------|--------------|----------------|
-| WeChat Video | Vertical | 1080×1440 | 3:4 | 20MB | `wechat_vertical` |
-| WeChat Video | Horizontal | 1440×1080 | 4:3 | 20MB | `wechat_horizontal` |
-| Douyin | Vertical | 1080×1440 | 3:4 | 50MB | `douyin_vertical` |
-| Douyin | Horizontal | 1440×1080 | 4:3 | 50MB | `douyin_horizontal` |
-| Kuaishou | Vertical | 1080×1440 | 3:4 | 15MB | `kuaishou_vertical` |
-| Kuaishou | Horizontal | 1440×1080 | 4:3 | 15MB | `kuaishou_horizontal` |
-| Bilibili | Homepage Recommended Cover | 1280×960 | 4:3 | 20MB | `bilibili_4_3` |
-| Bilibili | Profile Page Cover | 1920×1080 | 16:9 | 20MB | `bilibili_16_9` |
-| Xiaohongshu | Vertical | 1080×1440 | 3:4 | 32MB | `xiaohongshu_vertical` |
-| Xiaohongshu | Horizontal | 1440×1080 | 4:3 | 32MB | `xiaohongshu_horizontal` |
+| Platform | Orientation / Usage | Size (W×H) | Ratio | `platform_key` |
+|----------|---------------------|------------|-------|----------------|
+| WeChat Video | Profile Card | 810×1080 | 3:4 | `wechat_profile_card` |
+| WeChat Video | Share Card | 1280×720 | 16:9 | `wechat_share_card` |
+| Douyin | Vertical | 1080×1920 | 9:16 | `douyin_vertical` |
+| Douyin | Horizontal | 1920×1080 | 16:9 | `douyin_horizontal` |
+| Kuaishou | Vertical | 1080×1920 | 9:16 | `kuaishou_vertical` |
+| Kuaishou | Horizontal | 1920×1080 | 16:9 | `kuaishou_horizontal` |
+| Bilibili | Homepage Recommended Cover | 1280×960 | 4:3 | `bilibili` |
+| Bilibili | Profile Page Cover | 1920×1080 | 16:9 | `bilibili_profile` |
+| Xiaohongshu | Vertical | 1080×1440 | 3:4 | `xiaohongshu_vertical` |
+| Xiaohongshu | Horizontal | 1440×1080 | 4:3 | `xiaohongshu_horizontal` |
 
 > **Platform Notes:**
-> - **WeChat Video**: Recommended ratio 3:4 to 2:1, minimum resolution 720×960.
-> - **Douyin**: Recommended ratios 3:4, 4:3, 1:1, 9:16, 16:9; ratio exceeding 1:2 is not recommended; GIF format not supported.
-> - **Kuaishou**: Recommended 3:4 vertical.
-> - **Bilibili**: Two sizes generated — 4:3 for homepage recommended cover, 16:9 for profile page cover.
-> - **Xiaohongshu**: Recommended ratio 3:4 to 2:1, minimum resolution 720×960.
+> - **WeChat Video**: Two sizes generated simultaneously — 3:4 for profile card (810×1080), 16:9 for share card (1280×720).
+> - **Douyin**: Recommended ratios 3:4, 4:3, 1:1, 9:16, 16:9; prioritize 3:4 or 4:3.
+> - **Kuaishou**: Recommended 9:16 vertical.
+> - **Bilibili**: Two sizes generated simultaneously — 4:3 for homepage recommended cover, 16:9 for profile page cover.
+> - **Xiaohongshu**: Recommended ratio between 3:4 and 2:1.
 
 ## Usage
 
@@ -39,12 +38,12 @@ Automatically generate video cover images for major Chinese video platforms from
 # Install dependencies
 pip install pillow openai
 
-# Generate covers for all platforms
+# Generate thumbnails for all platforms
 python scripts/generate_covers.py <input_image> [output_dir]
 
-# Generate covers for specific platforms
+# Generate thumbnails for specific platforms
 python scripts/generate_covers.py <input_image> [output_dir] \
-    --platforms wechat_vertical douyin_vertical bilibili_4_3 bilibili_16_9
+    --platforms wechat_profile_card wechat_share_card bilibili bilibili_profile
 
 # Add text and decoration via AI prompt
 python scripts/generate_covers.py <input_image> [output_dir] \
@@ -81,7 +80,7 @@ python scripts/generate_covers.py <input_image> [output_dir] --no-ai
 ## Directory Structure
 
 ```
-video-cover-generator/
+video-thumbnail-generator/
 ├── SKILL.md                  # Skill metadata and workflow instructions
 ├── scripts/
 │   └── generate_covers.py    # Core processing script
