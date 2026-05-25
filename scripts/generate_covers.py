@@ -15,7 +15,7 @@
 平台 key 列表：
     wechat_profile_card  微信视频号个人主页卡片 810x1080  (3:4)
     wechat_share_card    微信视频号分享卡片     1280x720  (16:9)
-    douyin_vertical      抖音竖版        1080x1440 (3:4)
+    douyin_vertical      抖音竖版        810x1080  (3:4)
     douyin_horizontal    抖音横版        1440x1080 (4:3)
     kuaishou_vertical    快手竖版        1080x1920 (9:16)
     kuaishou_horizontal  快手横版        1920x1080 (16:9)
@@ -37,7 +37,7 @@ from PIL import Image, ImageFilter, ImageOps
 PLATFORM_SPECS = {
     "wechat_profile_card":     {"name": "微信视频号个人主页卡片", "width": 810,  "height": 1080},
     "wechat_share_card":       {"name": "微信视频号分享卡片",     "width": 1280, "height": 720},
-    "douyin_vertical":         {"name": "抖音竖版",         "width": 1080, "height": 1440},
+    "douyin_vertical":         {"name": "抖音竖版",         "width": 810,  "height": 1080},
     "douyin_horizontal":       {"name": "抖音横版",         "width": 1440, "height": 1080},
     "kuaishou_vertical":       {"name": "快手竖版",         "width": 1080, "height": 1920},
     "kuaishou_horizontal":     {"name": "快手横版",         "width": 1920, "height": 1080},
